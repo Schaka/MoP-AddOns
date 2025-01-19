@@ -1,0 +1,346 @@
+<!--
+    ArenaLive [Spectator] is an user interface for spectated arena 
+	wargames in World of Warcraft.
+    Copyright (C) 2015  Harald Böhm <harald@boehm.agency>
+	Further contributors: Jochen Taeschner and Romina Schmidt.
+	
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+	
+	ADDITIONAL PERMISSION UNDER GNU GPL VERSION 3 SECTION 7:
+	As a special exception, the copyright holder of this add-on gives you
+	permission to link this add-on with independent proprietary software,
+	regardless of the license terms of the independent proprietary software.
+-->
+
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+
+	<Script File="TargetFrames.lua" />
+
+	<Button name="ALSPEC_TargetFrame" frameStrata="LOW" toplevel="true" inherits="SecureUnitButtonTemplate, SecureHandlerBaseTemplate" parent="ArenaLiveSpectator">
+		<Size>
+			<AbsDimension x="237" y="72" />
+		</Size>
+		<Anchors>
+			<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOM">
+				<Offset>
+					<AbsDimension x="-14" y="58" />
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentBackground" file="Interface\AddOns\ArenaLiveSpectator3\Textures\TargetFrameBackground" parentKey="background">
+					<TexCoords left="0.037109375" right="0.962890625" top="0.2109375" bottom="0.7734375"/>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Frames>
+			<!-- We need to nest the frames so many times due to FrameLevel. -->
+			<Frame setAllPoints="true">
+				<Frames>
+					<Frame setAllPoints="true">
+						<Frames>
+							<Frame setAllPoints="true">
+								<Frames>
+									<Frame setAllPoints="true">
+										<Layers>
+											<Layer level="BACKGROUND">
+												<Texture name="$parentBorder" file="Interface\AddOns\ArenaLiveSpectator3\Textures\TargetFrameBorder" parentKey="border">
+													<Size>
+														<AbsDimension x="239" y="75" />
+													</Size>
+													<Anchors>
+														<Anchor point="TOPLEFT" />
+													</Anchors>
+													<TexCoords left="0.037109375" right="0.970703125" top="0.22265625" bottom="0.8046875"/>
+												</Texture>
+											</Layer>
+											<Layer level="OVERLAY">
+												<FontString name="$parentName" inherits="ArenaLiveFont_Name">
+													<Size>
+														<!-- I don't define X here, because the width of the frame needs to be dynamic. -->
+														<AbsDimension y="12" />
+													</Size>
+													<Anchors>
+														<Anchor point="TOPLEFT">
+															<Offset>
+																<AbsDimension x="72" y="-4" />
+															</Offset>										
+														</Anchor>
+													</Anchors>
+												</FontString>
+											</Layer>
+										</Layers>
+									</Frame>
+								</Frames>
+							</Frame>
+						</Frames>
+					</Frame>
+				</Frames>
+			</Frame>
+			<Frame name="$parentPortrait" inherits="ArenaLive_PortraitTemplate">
+				<Size>
+					<AbsDimension x="64" y="64" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="4" y="-5" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Frames>
+					<Frame name="$parentCCIndicator" inherits="ArenaLive_CCIndicatorTemplate" setAllPoints="true" />
+				</Frames>
+			</Frame>
+			<StatusBar name="$parentHealthBar">
+				<Size>
+					<AbsDimension x="165" y="32" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentPortrait" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="0" y="-16" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<BarTexture file="Interface\TargetingFrame\UI-StatusBar"/>
+				<BarColor r="0" g="1.0" b="0"/>
+				<Layers>
+					<Layer level="ARTWORK">
+						<Texture name="$parentAbsorbBar" inherits="ArenaLive_AbsorbBarTemplate" />
+					</Layer>
+					<Layer level="OVERLAY" textureSubLevel="1">
+						<Texture name="$parentHealPredictionBar" inherits="ArenaLive_HealPredictionBar" />
+					</Layer>
+					<Layer level="OVERLAY" textureSubLevel="2">
+						<Texture name="$parentAbsorbBarOverlay" inherits="ArenaLive_AbsorbBarOverlayTemplate" />
+						<Texture name="$parentAbsorbBarFullHPIndicator" inherits="ArenaLive_AbsorbFullHPIndicator" />					
+					</Layer>
+					<Layer level="OVERLAY" textureSubLevel="3">
+						<FontString name="$parentText" inherits="ArenaLiveFont_StatusBarTextSmall" setAllPoints="true" />
+					</Layer>
+				</Layers>
+			</StatusBar>
+			<StatusBar name="$parentPowerBar">
+				<Size>
+					<AbsDimension x="165" y="16" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentHealthBar" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="0" y="0" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<BarTexture file="Interface\TargetingFrame\UI-StatusBar"/>
+				<BarColor r="0" g="0" b="1.0"/>
+				<Layers>
+					<Layer level="OVERLAY">
+						<FontString name="$parentText" inherits="ArenaLiveFont_StatusBarTextSmall" setAllPoints="true" />
+					</Layer>
+				</Layers>
+			</StatusBar>
+			<StatusBar name="$parentCastBar" inherits="ALSPEC_TargetFrameCastBarTemplate">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="22" y="6" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</StatusBar>
+			<Frame name="$parentCastHistory">
+				<Size>
+					<AbsDimension x="225" y="21" />
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeTo="$parentCastBar" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="-22" y="5" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Frame>
+			<Frame name="$parentAuraFrame" inherits="ArenaLive_AuraFrameTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="3" y="-3" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Frame>
+		</Frames>
+	</Button>
+	
+	<Button name="ALSPEC_TargetTargetFrame" frameStrata="LOW" toplevel="true" inherits="SecureUnitButtonTemplate, SecureHandlerBaseTemplate" parent="ArenaLiveSpectator">
+		<Size>
+			<AbsDimension x="237" y="72" />
+		</Size>
+		<Anchors>
+			<Anchor point="BOTTOMLEFT" relativePoint="BOTTOM">
+				<Offset>
+					<AbsDimension x="14" y="58" />
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentBackground" file="Interface\AddOns\ArenaLiveSpectator3\Textures\TargetFrameBackground">
+					<TexCoords left="0.962890625" right="0.037109375" top="0.2109375" bottom="0.7734375" />
+				</Texture>
+			</Layer>
+		</Layers>
+		<Frames>
+			<!-- We need to nest the frames so many times due to FrameLevel. -->
+			<Frame setAllPoints="true">
+				<Frames>
+					<Frame setAllPoints="true">
+						<Frames>
+							<Frame setAllPoints="true">
+								<Frames>
+									<Frame setAllPoints="true">
+										<Layers>
+											<Layer level="BACKGROUND">
+												<Texture name="$parentBorder" file="Interface\AddOns\ArenaLiveSpectator3\Textures\TargetFrameBorder">
+													<Size>
+														<AbsDimension x="239" y="75" />
+													</Size>
+													<Anchors>
+														<Anchor point="TOPRIGHT" />
+													</Anchors>
+													<TexCoords left="0.970703125" right="0.037109375" top="0.22265625" bottom="0.8046875"/>
+												</Texture>
+											</Layer>
+											<Layer level="OVERLAY">
+												<FontString name="$parentName" inherits="ArenaLiveFont_Name">
+													<Size>
+														<!-- I don't define X here, because the width of the frame needs to be dynamic. -->
+														<AbsDimension y="12" />
+													</Size>
+													<Anchors>
+														<Anchor point="TOPRIGHT">
+															<Offset>
+																<AbsDimension x="-72" y="-4" />
+															</Offset>										
+														</Anchor>
+													</Anchors>
+												</FontString>
+											</Layer>
+										</Layers>
+									</Frame>
+								</Frames>
+							</Frame>
+						</Frames>
+					</Frame>
+				</Frames>
+			</Frame>
+			<Frame name="$parentPortrait" inherits="ArenaLive_PortraitTemplate">
+				<Size>
+					<AbsDimension x="64" y="64" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-4" y="-5" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Frames>
+					<Frame name="$parentCCIndicator" inherits="ArenaLive_CCIndicatorTemplate" setAllPoints="true" />
+				</Frames>
+			</Frame>
+			<StatusBar name="$parentHealthBar">
+				<Size>
+					<AbsDimension x="165" y="32" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativeTo="$parentPortrait" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="0" y="-16" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<BarTexture file="Interface\TargetingFrame\UI-StatusBar"/>
+				<BarColor r="0" g="1.0" b="0"/>
+				<Layers>
+					<Layer level="ARTWORK">
+						<Texture name="$parentAbsorbBar" inherits="ArenaLive_AbsorbBarTemplate" />
+					</Layer>
+					<Layer level="OVERLAY" textureSubLevel="1">
+						<Texture name="$parentHealPredictionBar" inherits="ArenaLive_HealPredictionBar" />
+					</Layer>
+					<Layer level="OVERLAY" textureSubLevel="2">
+						<Texture name="$parentAbsorbBarOverlay" inherits="ArenaLive_AbsorbBarOverlayTemplate" />
+						<Texture name="$parentAbsorbBarFullHPIndicator" inherits="ArenaLive_AbsorbFullHPIndicator" />					
+					</Layer>
+					<Layer level="OVERLAY" textureSubLevel="3">
+						<FontString name="$parentText" inherits="ArenaLiveFont_StatusBarTextSmall" setAllPoints="true" />
+					</Layer>
+				</Layers>
+			</StatusBar>
+			<StatusBar name="$parentPowerBar">
+				<Size>
+					<AbsDimension x="165" y="16" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentHealthBar" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="0" y="0" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<BarTexture file="Interface\TargetingFrame\UI-StatusBar"/>
+				<BarColor r="0" g="0" b="1.0"/>
+				<Layers>
+					<Layer level="OVERLAY">
+						<FontString name="$parentText" inherits="ArenaLiveFont_StatusBarTextSmall" setAllPoints="true" />
+					</Layer>
+				</Layers>
+			</StatusBar>
+			<StatusBar name="$parentCastBar" inherits="ALSPEC_TargetFrameCastBarTemplate">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-22" y="6" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</StatusBar>
+			<Frame name="$parentCastHistory">
+				<Size>
+					<AbsDimension x="225" y="21" />
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parentCastBar" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="22" y="5" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Frame>
+			<Frame name="$parentAuraFrame" inherits="ArenaLive_AuraFrameTemplate">
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-3" y="-3" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Frame>
+		</Frames>
+	</Button>
+</Ui>

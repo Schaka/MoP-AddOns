@@ -1,0 +1,235 @@
+<!--
+    ArenaLive [Spectator] is an user interface for spectated arena 
+	wargames in World of Warcraft.
+    Copyright (C) 2015  Harald Böhm <harald@boehm.agency>
+	Further contributors: Jochen Taeschner and Romina Schmidt.
+	
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+	
+	ADDITIONAL PERMISSION UNDER GNU GPL VERSION 3 SECTION 7:
+	As a special exception, the copyright holder of this add-on gives you
+	permission to link this add-on with independent proprietary software,
+	regardless of the license terms of the independent proprietary software.
+-->
+
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+
+	<Font name="ArenaLiveSpectatorScoreBoardDampeningFont" outline="NORMAL" font="Fonts\FRIZQT__.TTF" virtual="true">
+		<FontHeight>
+			<AbsValue val="12"/>
+		</FontHeight>
+	</Font>
+
+	<Font name="ArenaLiveSpectatorScoreBoardFont" virtual="true" font="Fonts\FRIZQT__.TTF">
+		<FontHeight>
+			<AbsValue val="24"/>
+		</FontHeight>
+		<Shadow>
+			<Offset>
+				<AbsDimension x="2" y="-2"/>
+			</Offset>
+			<Color r="0" g="0" b="0"/>
+		</Shadow>		
+		<Color r="1" g="1" b="1"/>
+	</Font>
+
+	<Font name="ArenaLiveSpectatorScoreBoardTimeFont" virtual="true" font="Fonts\FRIZQT__.TTF">
+		<FontHeight>
+			<AbsValue val="16"/>
+		</FontHeight>
+		<Shadow>
+			<Offset>
+				<AbsDimension x="2" y="-2"/>
+			</Offset>
+			<Color r="0" g="0" b="0"/>
+		</Shadow>		
+		<Color r="1" g="1" b="1"/>
+	</Font>
+	
+	<Button name="ArenaLiveSpectatorScoreBoard" enableMouse="true" parent="ArenaLiveSpectator">
+		<Size>
+			<AbsDimension x="640" y="63" />
+		</Size>
+		<Anchors>
+			<Anchor point="TOP" />
+		</Anchors>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentCenterBG" file="Interface\AddOns\ArenaLiveSpectator3\Textures\ScoreBoardCenter" parentKey="centerBG">
+					<Size>
+						<AbsDimension x="128" y="63" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOP" />
+					</Anchors>
+					<TexCoords left="0" right="1" top="0.125" bottom="0.6171875"/>
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY">
+				<FontString name="$parentTimer" inherits="ArenaLiveSpectatorScoreBoardTimeFont" justifyH="CENTER" text="00:00" parentKey="timer">
+					<Anchors>
+						<Anchor point="BOTTOM" relativeTo="$parentCenterBG">
+							<Offset>
+								<AbsDimension x="2" y="9"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentScoreLeft" inherits="ArenaLiveSpectatorScoreBoardFont" justifyH="RIGHT" parentKey="scoreLeft">
+					<Size>
+						<AbsDimension x="40" y="28" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parentCenterBG">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentScoreRight" inherits="ArenaLiveSpectatorScoreBoardFont" justifyH="LEFT" parentKey="scoreRight">
+					<Size>
+						<AbsDimension x="40" y="28" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPRIGHT" relativeTo="$parentCenterBG">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Frame name="$parentDampeningIndicator" parentKey="dampeningIndicator">
+				<Size>
+					<AbsDimension x="32" y="32"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOP" y="-1" />
+				</Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture name="$parentVS" file="Interface\AddOns\ArenaLiveSpectator3\Textures\VersusText" parentKey="vs">
+							<Size>
+								<AbsDimension x="64" y="32"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOP" />
+							</Anchors>
+						</Texture>
+						<Texture name="$parentIcon" file="Interface\AddOns\ArenaLiveSpectator3\Textures\DampeningTrackerCross" parentKey="icon" hidden="true">
+							<TexCoords left="0" right="1" top="0" bottom="1"/>
+						</Texture>
+					</Layer>
+				</Layers>
+				<Frames>
+					<Frame setAllPoints="true">
+						<Layers>
+							<Layer level="OVERLAY">
+								<FontString name="$parentText" inherits="ArenaLiveSpectatorScoreBoardDampeningFont" justifyH="LEFT" hidden="true">
+									<Anchors>
+										<Anchor point="BOTTOMLEFT" relativeTo="$parentIcon" relaltivePoint="BOTTOMRIGHT">
+											<Offset>
+												<AbsDimension x="13" y="-2"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+					</Frame>
+					<StatusBar name="$parentStatusBar" orientation="VERTICAL" parentKey="statusBar" hidden="true">
+						<Size>
+							<AbsDimension x="32" y="32"/>
+						</Size>
+						<Anchors>
+							<Anchor point="CENTER" relativeTo="$parentIcon" />
+						</Anchors>
+						<BarTexture file="Interface\AddOns\ArenaLiveSpectator3\Textures\DampeningTrackerCross"/>
+						<BarColor r="1.0" g="0" b="0"/>
+					</StatusBar>
+				</Frames>
+				<Animations>
+					<AnimationGroup looping="NONE" parentKey="anim">
+						<Alpha target="$parentVS" duration="0.3" smoothing="OUT" change="-1" order="1"  />
+						<Alpha target="$parentIcon" duration="0.3" smoothing="OUT" change="1" order="1" />
+					</AnimationGroup>
+				</Animations>
+			</Frame>
+			<Frame name="$parentLeftTeam" parentKey="leftTeam">
+				<Size>
+					<AbsDimension x="256" y="37"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativeTo="$parentCenterBG" relativePoint="TOPLEFT" />
+				</Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture name="$parentBackground" file="Interface\AddOns\ArenaLiveSpectator3\Textures\ScoreBoardTeamBackground" parentKey="background">
+							<TexCoords left="0" right="1" top="0" bottom="0.578125"/>
+						</Texture>
+					</Layer>
+					<Layer level="OVERLAY">
+						<FontString name="$parentName" inherits="ArenaLiveSpectatorScoreBoardFont" justifyH="CENTER" parentKey="name">
+							<Size>
+								<AbsDimension x="230" y="28" />
+							</Size>
+							<Anchors>
+								<Anchor point="TOPRIGHT">
+									<Offset>
+										<AbsDimension x="-16" y="0"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+			<Frame name="$parentRightTeam" parentKey="rightTeam">
+				<Size>
+					<AbsDimension x="256" y="37"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentCenterBG" relativePoint="TOPRIGHT" />
+				</Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture name="$parentBackground" file="Interface\AddOns\ArenaLiveSpectator3\Textures\ScoreBoardTeamBackground" parentKey="background">
+							<TexCoords left="1" right="0" top="0" bottom="0.578125"/>
+						</Texture>
+					</Layer>
+					<Layer level="OVERLAY">
+						<FontString name="$parentName" inherits="ArenaLiveSpectatorScoreBoardFont" justifyH="CENTER" parentKey="name">
+							<Size>
+								<AbsDimension x="230" y="28" />
+							</Size>
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="16" y="0"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+		</Frames>
+	</Button>
+	
+	<Script File="ScoreBoard.lua" />
+</Ui>

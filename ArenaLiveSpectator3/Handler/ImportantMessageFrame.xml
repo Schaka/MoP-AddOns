@@ -1,0 +1,129 @@
+<!--
+    ArenaLive [Spectator] is an user interface for spectated arena 
+	wargames in World of Warcraft.
+    Copyright (C) 2015  Harald Böhm <harald@boehm.agency>
+	Further contributors: Jochen Taeschner and Romina Schmidt.
+	
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+	
+	ADDITIONAL PERMISSION UNDER GNU GPL VERSION 3 SECTION 7:
+	As a special exception, the copyright holder of this add-on gives you
+	permission to link this add-on with independent proprietary software,
+	regardless of the license terms of the independent proprietary software.
+-->
+
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+
+	<FontFamily name="ArenaLvieSpectatorMessageFrameFont" virtual="true">
+		<Member alphabet="roman">
+			<Font font="Fonts\FRIZQT__.TTF" justifyH="LEFT" height="24">
+				<Shadow>
+					<Offset>
+						<AbsDimension x="2" y="-2"/>
+					</Offset>
+					<Color r="0" g="0" b="0"/>
+				</Shadow>		
+				<Color r="1.0" g="1.0" b="1.0"/>
+			</Font>
+		</Member>
+		<Member alphabet="korean">
+			<Font name="ArenaLvieSpectatorMessageFrameFont" font="Fonts\2002.TTF" justifyH="LEFT" height="24">
+				<Shadow>
+					<Offset>
+						<AbsDimension x="2" y="-2"/>
+					</Offset>
+					<Color r="0" g="0" b="0"/>
+				</Shadow>		
+				<Color r="1.0" g="1.0" b="1.0"/>
+			</Font>
+		</Member>
+		<Member alphabet="russian">
+			<Font name="ArenaLvieSpectatorMessageFrameFont" font="Fonts\FRIZQT___CYR.TTF" justifyH="LEFT" height="24">
+				<Shadow>
+					<Offset>
+						<AbsDimension x="2" y="-2"/>
+					</Offset>
+					<Color r="0" g="0" b="0"/>
+				</Shadow>		
+				<Color r="1.0" g="1.0" b="1.0"/>
+			</Font>
+		</Member>
+		<Member alphabet="simplifiedchinese">
+			<Font name="ArenaLvieSpectatorMessageFrameFont" font="Fonts\ARKai_T.TTF" justifyH="LEFT" height="24">
+				<Shadow>
+					<Offset>
+						<AbsDimension x="2" y="-2"/>
+					</Offset>
+					<Color r="0" g="0" b="0"/>
+				</Shadow>		
+				<Color r="1.0" g="1.0" b="1.0"/>
+			</Font>
+		</Member>
+		<Member alphabet="traditionalchinese">
+			<Font name="ArenaLvieSpectatorMessageFrameFont" font="Fonts\blei00d.TTF" justifyH="LEFT" height="24">
+				<Shadow>
+					<Offset>
+						<AbsDimension x="2" y="-2"/>
+					</Offset>
+					<Color r="0" g="0" b="0"/>
+				</Shadow>		
+				<Color r="1.0" g="1.0" b="1.0"/>
+			</Font>
+		</Member>
+	</FontFamily>
+
+	<Frame name="ArenaLvieSpectatorSingleMessageFrameTemplate" virtual="true" hidden="true">
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="$parentFont" inherits="ArenaLvieSpectatorMessageFrameFont" parentKey="font">
+					<Size>
+						<AbsDimension y="24" />
+					</Size>
+					<Anchors>
+						<Anchor point="CENTER">
+							<Offset>
+								<AbsDimension x="37" y="0" /> <!-- Icon Size + 5 Pixels Offset -->
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<Texture name="$parentIcon" parentKey="icon">
+					<Size>
+						<AbsDimension x="26" y="26" />
+					</Size>
+					<Anchors>
+						<Anchor point="RIGHT" relativeTo="$parentFont" relativePoint="LEFT">
+							<Offset>
+								<AbsDimension x="-5" y="0" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Animations>
+			<AnimationGroup looping="NONE" parentKey="anim">
+				<Alpha duration="0" change="-1" order="1"  />
+				<Alpha duration="0.5" smoothing="OUT" change="1" order="2" />
+				<Alpha startDelay="5" duration="0.5" smoothing="OUT" change="-1" order="2" />
+			</AnimationGroup>
+			<AnimationGroup looping="NONE" parentKey="anim2">
+				<Alpha startDelay="3" duration="0.5" smoothing="OUT" change="-1" order="2" />
+			</AnimationGroup>
+		</Animations>
+	</Frame>
+	
+	<Script File="ImportantMessageFrame.lua" />
+</Ui>

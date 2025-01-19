@@ -1,0 +1,8 @@
+## Interface: 60200
+## Title: ArenaLive3 [Spectator]
+## Notes: Spectator Mode UI for WoW Spectated War Games.
+## Author: Vadrak
+## Version: 3.2.3b
+## Dependencies: ArenaLive3
+## SavedVariables: ALSPEC_Database
+load.xml

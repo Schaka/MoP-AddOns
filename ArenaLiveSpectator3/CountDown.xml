@@ -1,0 +1,103 @@
+<!--
+    ArenaLive [Spectator] is an user interface for spectated arena 
+	wargames in World of Warcraft.
+    Copyright (C) 2015  Harald Böhm <harald@boehm.agency>
+	Further contributors: Jochen Taeschner and Romina Schmidt.
+	
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+	
+	ADDITIONAL PERMISSION UNDER GNU GPL VERSION 3 SECTION 7:
+	As a special exception, the copyright holder of this add-on gives you
+	permission to link this add-on with independent proprietary software,
+	regardless of the license terms of the independent proprietary software.
+-->
+
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+
+	<Frame name="$parentCountDown" parent="ArenaLiveSpectator" hidden="true">
+		<Size>
+			<AbsDimension x="256" y="170" />
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER">
+				<Offset>
+					<AbsDimension x="0" y="100" />
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Frames>
+			<Frame name="$parentDigitFrame" setAllPoints="true">
+				<Layers>
+					<Layer level="OVERLAY">
+						<Texture name="$parentTexture" file="Interface\AddOns\ArenaLiveSpectator3\Textures\CountDown" />
+					</Layer>
+				</Layers>
+				<Animations>
+					<AnimationGroup name="$parentAnimation" looping="NONE" parentKey="anim">
+						<Scale duration="0" smoothing="IN" scaleX="0.25" scaleY="0.25" order="1" />
+						<Scale duration="0.3" smoothing="OUT" scaleX="2" scaleY="2" order="2" />
+						<Scale startDelay="0.6" duration="0.1" smoothing="OUT" scaleX="1" scaleY="1" order="3" />
+						<Scripts>
+							<OnPlay>
+								ArenaLiveSpectatorCountDown:OnAnimationPlay();
+							</OnPlay>
+							<OnFinished>
+								ArenaLiveSpectatorCountDown:OnAnimationFinished();
+							</OnFinished>
+						</Scripts>
+					</AnimationGroup>
+				</Animations>
+			</Frame>
+			<StatusBar name="$parentStatusBar">
+				<Size>
+					<AbsDimension x="222" y="22" />
+				</Size>
+				<Anchors>
+					<Anchor point="CENTER" />
+				</Anchors>
+				<Layers>
+					<Layer level="OVERLAY">
+						<Texture name="$parentBorder" file="Interface\AddOns\ArenaLiveSpectator3\Textures\CountDownStatusBarBorder">
+							<Size>
+								<AbsDimension x="225" y="25" />
+							</Size>
+							<Anchors>
+								<Anchor point="CENTER">
+									<Offset>
+										<AbsDimension x="0" y="0" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<TexCoords left="0.05859375" right="0.9375" top="0.109375" bottom="0.890625"/>
+						</Texture>
+						<FontString name="$parentText" setAllPoints="true" inherits="ArenaLiveFont_StatusBarTextVeryLarge">
+							<Anchors>
+								<Anchor point="CENTER">
+									<Offset>
+										<AbsDimension x="0" y="0" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<BarTexture file="Interface\TargetingFrame\UI-StatusBar"/>
+				<BarColor r="0.77" g="0.69" b="0.37"/>
+			</StatusBar>
+		</Frames>
+	</Frame>
+
+	<Script File="CountDown.lua" />
+</Ui>

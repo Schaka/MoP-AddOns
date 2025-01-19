@@ -1,0 +1,435 @@
+<!--
+    ArenaLive [Spectator] is an user interface for spectated arena 
+	wargames in World of Warcraft.
+    Copyright (C) 2015  Harald Böhm <harald@boehm.agency>
+	Further contributors: Jochen Taeschner and Romina Schmidt.
+	
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+	
+	ADDITIONAL PERMISSION UNDER GNU GPL VERSION 3 SECTION 7:
+	As a special exception, the copyright holder of this add-on gives you
+	permission to link this add-on with independent proprietary software,
+	regardless of the license terms of the independent proprietary software.
+-->
+
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+
+	<FontFamily name="ArenaLiveSpectatorMatchStatistic_HeaderFont" virtual="true">
+		<Member alphabet="roman">
+			<Font font="Fonts\FRIZQT__.TTF" justifyH="LEFT" height="16">
+				<Shadow>
+					<Offset>
+						<AbsDimension x="2" y="-2"/>
+					</Offset>
+					<Color r="0" g="0" b="0"/>
+				</Shadow>		
+				<Color r="1.0" g="1.0" b="1.0"/>
+			</Font>
+		</Member>
+		<Member alphabet="korean">
+			<Font name="ArenaLiveSpectatorMatchStatistic_HeaderFont" font="Fonts\2002.TTF" justifyH="LEFT" height="16">
+				<Shadow>
+					<Offset>
+						<AbsDimension x="2" y="-2"/>
+					</Offset>
+					<Color r="0" g="0" b="0"/>
+				</Shadow>		
+				<Color r="1.0" g="1.0" b="1.0"/>
+			</Font>
+		</Member>
+		<Member alphabet="russian">
+			<Font name="ArenaLiveSpectatorMatchStatistic_HeaderFont" font="Fonts\FRIZQT___CYR.TTF" justifyH="LEFT" height="16">
+				<Shadow>
+					<Offset>
+						<AbsDimension x="2" y="-2"/>
+					</Offset>
+					<Color r="0" g="0" b="0"/>
+				</Shadow>		
+				<Color r="1.0" g="1.0" b="1.0"/>
+			</Font>
+		</Member>
+		<Member alphabet="simplifiedchinese">
+			<Font name="ArenaLiveSpectatorMatchStatistic_HeaderFont" font="Fonts\ARKai_T.TTF" justifyH="LEFT" height="16">
+				<Shadow>
+					<Offset>
+						<AbsDimension x="2" y="-2"/>
+					</Offset>
+					<Color r="0" g="0" b="0"/>
+				</Shadow>		
+				<Color r="1.0" g="1.0" b="1.0"/>
+			</Font>
+		</Member>
+		<Member alphabet="traditionalchinese">
+			<Font name="ArenaLiveSpectatorMatchStatistic_HeaderFont" font="Fonts\blei00d.TTF" justifyH="LEFT" height="16">
+				<Shadow>
+					<Offset>
+						<AbsDimension x="2" y="-2"/>
+					</Offset>
+					<Color r="0" g="0" b="0"/>
+				</Shadow>		
+				<Color r="1.0" g="1.0" b="1.0"/>
+			</Font>
+		</Member>
+	</FontFamily>
+
+	<FontFamily name="ArenaLiveSpectatorMatchStatistic_PlayerEntryFont" justifyH="LEFT" virtual="true">
+		<Member alphabet="roman">
+			<Font font="Fonts\FRIZQT__.TTF" justifyH="LEFT" height="14">
+				<Shadow>
+					<Offset>
+						<AbsDimension x="2" y="-2"/>
+					</Offset>
+					<Color r="0" g="0" b="0"/>
+				</Shadow>		
+				<Color r="1.0" g="1.0" b="1.0"/>
+			</Font>
+		</Member>
+		<Member alphabet="korean">
+			<Font name="ArenaLiveSpectatorMatchStatistic_PlayerEntryFont" font="Fonts\2002.TTF" justifyH="LEFT" height="14">
+				<Shadow>
+					<Offset>
+						<AbsDimension x="2" y="-2"/>
+					</Offset>
+					<Color r="0" g="0" b="0"/>
+				</Shadow>		
+				<Color r="1.0" g="1.0" b="1.0"/>
+			</Font>
+		</Member>
+		<Member alphabet="russian">
+			<Font name="ArenaLiveSpectatorMatchStatistic_PlayerEntryFont" font="Fonts\FRIZQT___CYR.TTF" justifyH="LEFT" height="14">
+				<Shadow>
+					<Offset>
+						<AbsDimension x="2" y="-2"/>
+					</Offset>
+					<Color r="0" g="0" b="0"/>
+				</Shadow>		
+				<Color r="1.0" g="1.0" b="1.0"/>
+			</Font>
+		</Member>
+		<Member alphabet="simplifiedchinese">
+			<Font name="ArenaLiveSpectatorMatchStatistic_PlayerEntryFont" font="Fonts\ARKai_T.TTF" justifyH="LEFT" height="14">
+				<Shadow>
+					<Offset>
+						<AbsDimension x="2" y="-2"/>
+					</Offset>
+					<Color r="0" g="0" b="0"/>
+				</Shadow>		
+				<Color r="1.0" g="1.0" b="1.0"/>
+			</Font>
+		</Member>
+		<Member alphabet="traditionalchinese">
+			<Font name="ArenaLiveSpectatorMatchStatistic_PlayerEntryFont" font="Fonts\blei00d.TTF" justifyH="LEFT" height="14">
+				<Shadow>
+					<Offset>
+						<AbsDimension x="2" y="-2"/>
+					</Offset>
+					<Color r="0" g="0" b="0"/>
+				</Shadow>		
+				<Color r="1.0" g="1.0" b="1.0"/>
+			</Font>
+		</Member>
+	</FontFamily>	
+	
+	<Button name="ArenaLiveSpectatorMatchStatisticHeaderTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="855" y="36" />
+		</Size>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentBackground" file="Interface\AddOns\ArenaLiveSpectator3\Textures\MatchStatisticHeaderBackground" parentKey="background" />
+			</Layer>
+			<Layer level="OVERLAY">
+				<FontString name="$parentNameText" inherits="ArenaLiveSpectatorMatchStatistic_HeaderFont" parentKey="name">
+					<Size>
+						<AbsDimension x="245" y="32" />
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT">
+							<Offset>
+								<AbsDimension x="20" y="0" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentDamageText" inherits="ArenaLiveSpectatorMatchStatistic_HeaderFont" justifyH="CENTER" parentKey="damage">
+					<Size>
+						<AbsDimension x="150" y="32" />
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="$parentNameText" relativePoint="RIGHT">
+							<Offset>
+								<AbsDimension x="5" y="0" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentHighestDamageText" inherits="ArenaLiveSpectatorMatchStatistic_HeaderFont" justifyH="CENTER" parentKey="highestDamage">
+					<Size>
+						<AbsDimension x="150" y="32" />
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="$parentDamageText" relativePoint="RIGHT">
+							<Offset>
+								<AbsDimension x="5" y="0" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentHealingText" inherits="ArenaLiveSpectatorMatchStatistic_HeaderFont" justifyH="CENTER" parentKey="healing">
+					<Size>
+						<AbsDimension x="150" y="32" />
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="$parentHighestDamageText" relativePoint="RIGHT">
+							<Offset>
+								<AbsDimension x="5" y="0" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentTimeInCCText" inherits="ArenaLiveSpectatorMatchStatistic_HeaderFont" justifyH="CENTER" parentKey="ccd">
+					<Size>
+						<AbsDimension x="100" y="32" />
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="$parentHealingText" relativePoint="RIGHT">
+							<Offset>
+								<AbsDimension x="5" y="0" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+	</Button>	
+	
+	<Button name="ArenaLiveSpectatorMatchStatisticPlayerEntryTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="855" y="32" />
+		</Size>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentBackground" file="Interface\AddOns\ArenaLiveSpectator3\Textures\MatchStatisticHeaderBackground" parentKey="background">
+					<Color r="0" g="0" b="0" a="0.5" />
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY">
+				<Texture name="$parentClassIcon" file="Interface\Glues\CharacterCreate\UI-CharacterCreate-Classes" parentKey="icon">
+					<Size>
+						<AbsDimension x="28" y="28"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT">
+							<Offset>
+								<AbsDimension x="20" y="0" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<FontString name="$parentNameText" inherits="ArenaLiveSpectatorMatchStatistic_PlayerEntryFont" parentKey="name">
+					<Size>
+						<AbsDimension x="212" y="32" />
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="$parentClassIcon" relativePoint="RIGHT" parentKey="icon">
+							<Offset>
+								<AbsDimension x="5" y="0" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentDamageText" inherits="ArenaLiveSpectatorMatchStatistic_PlayerEntryFont" justifyH="CENTER" parentKey="damage">
+					<Size>
+						<AbsDimension x="150" y="32" />
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="$parentNameText" relativePoint="RIGHT">
+							<Offset>
+								<AbsDimension x="5" y="0" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentHighestDamageText" inherits="ArenaLiveSpectatorMatchStatistic_PlayerEntryFont" justifyH="CENTER" parentKey="highestDamage">
+					<Size>
+						<AbsDimension x="150" y="32" />
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="$parentDamageText" relativePoint="RIGHT">
+							<Offset>
+								<AbsDimension x="5" y="0" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentHealingText" inherits="ArenaLiveSpectatorMatchStatistic_PlayerEntryFont" justifyH="CENTER" parentKey="healing">
+					<Size>
+						<AbsDimension x="150" y="32" />
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="$parentHighestDamageText" relativePoint="RIGHT">
+							<Offset>
+								<AbsDimension x="5" y="0" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentTimeInCCText" inherits="ArenaLiveSpectatorMatchStatistic_PlayerEntryFont" justifyH="CENTER" parentKey="ccd">
+					<Size>
+						<AbsDimension x="100" y="32" />
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="$parentHealingText" relativePoint="RIGHT">
+							<Offset>
+								<AbsDimension x="5" y="0" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+	</Button>	
+	
+	<Frame name="ArenaLiveSpectatorMatchStatisticTeamFrameTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="855" y="221" />
+		</Size>
+		<Frames>
+			<Button name="$parentHeader" inherits="ArenaLiveSpectatorMatchStatisticHeaderTemplate" parentKey="header">
+				<Anchors>
+					<Anchor point="TOPLEFT" />
+				</Anchors>
+			</Button>
+			<Button name="$parentPlayer1" inherits="ArenaLiveSpectatorMatchStatisticPlayerEntryTemplate" parentKey="player1">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentHeader" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="0" y="-5" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentPlayer2" inherits="ArenaLiveSpectatorMatchStatisticPlayerEntryTemplate" parentKey="player2">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentPlayer1" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="0" y="-5" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentPlayer3" inherits="ArenaLiveSpectatorMatchStatisticPlayerEntryTemplate" parentKey="player3">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentPlayer2" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="0" y="-5" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentPlayer4" inherits="ArenaLiveSpectatorMatchStatisticPlayerEntryTemplate" parentKey="player4">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentPlayer3" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="0" y="-5" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentPlayer5" inherits="ArenaLiveSpectatorMatchStatisticPlayerEntryTemplate" parentKey="player5">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentPlayer4" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="0" y="-5" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+		</Frames>
+	</Frame>	
+	
+	<Button name="ArenaLiveSpectatorMatchStatistic" inherits="PortraitFrameTemplate" parent="UIParent" hidden="true">
+		<Size>
+			<AbsDimension x="878" y="114" />
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER" />
+		</Anchors>
+		<Frames>
+			<Button name="$parentDeleteMatchButton" inherits="UIPanelButtonTemplate" parentKey="deleteButton">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="60" y="-45" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentClearDatabaseButton" inherits="UIPanelButtonTemplate" parentKey="clearDatabaseButton">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentDeleteMatchButton" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="5" y="0" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentMatchDropDown" inherits="ArenaLive_OptionsDropDownLargeTitleTemplate" parentKey="dropdown">
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-40" y="-40" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Frame name="$parentInset" useParentLevel="true" inherits="InsetFrameTemplate" parentKey="inset">
+				<Anchors>
+					<Anchor point="TOPLEFT" x="5" y="-70"/>
+					<Anchor point="BOTTOMRIGHT" x="-7" y="24" />
+				</Anchors>
+			</Frame>
+			<Frame name="$parentTeamA" inherits="ArenaLiveSpectatorMatchStatisticTeamFrameTemplate" parentKey="TeamA">
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="0" y="-77" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Frame>
+			<Frame name="$parentTeamB" inherits="ArenaLiveSpectatorMatchStatisticTeamFrameTemplate" parentKey="TeamB">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentTeamA" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="0" y="-10" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Frame>
+			<Button name="$parentLeaveButton" inherits="UIPanelButtonTemplate" parentKey="leaveButton">
+				<Anchors>
+					<Anchor point="BOTTOM">
+						<Offset>
+							<AbsDimension x="0" y="3" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+		</Frames>
+	</Button>
+	
+	<Script File="MatchStatistic.lua" />
+</Ui>

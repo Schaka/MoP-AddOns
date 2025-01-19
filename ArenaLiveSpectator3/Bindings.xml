@@ -1,0 +1,13 @@
+<Bindings>
+  <Binding name="CLICK ALSPEC_LeftSideFramesFrame1:LeftButton" header="ARENALIVESPECTATOR_TARGETING_MACROS" category="ArenaLive [Spectator]" />
+  <Binding name="CLICK ALSPEC_LeftSideFramesFrame2:LeftButton" header="ARENALIVESPECTATOR_TARGETING_MACROS" category="ArenaLive [Spectator]" />
+  <Binding name="CLICK ALSPEC_LeftSideFramesFrame3:LeftButton" header="ARENALIVESPECTATOR_TARGETING_MACROS" category="ArenaLive [Spectator]" />
+  <Binding name="CLICK ALSPEC_LeftSideFramesFrame4:LeftButton" header="ARENALIVESPECTATOR_TARGETING_MACROS" category="ArenaLive [Spectator]" />
+  <Binding name="CLICK ALSPEC_LeftSideFramesFrame5:LeftButton" header="ARENALIVESPECTATOR_TARGETING_MACROS" category="ArenaLive [Spectator]" />
+ 
+  <Binding name="CLICK ALSPEC_RightSideFramesFrame1:LeftButton" header="ARENALIVESPECTATOR_TARGETING_MACROS" category="ArenaLive [Spectator]" />
+  <Binding name="CLICK ALSPEC_RightSideFramesFrame2:LeftButton" header="ARENALIVESPECTATOR_TARGETING_MACROS" category="ArenaLive [Spectator]" />
+  <Binding name="CLICK ALSPEC_RightSideFramesFrame3:LeftButton" header="ARENALIVESPECTATOR_TARGETING_MACROS" category="ArenaLive [Spectator]" />
+  <Binding name="CLICK ALSPEC_RightSideFramesFrame4:LeftButton" header="ARENALIVESPECTATOR_TARGETING_MACROS" category="ArenaLive [Spectator]" />
+  <Binding name="CLICK ALSPEC_RightSideFramesFrame5:LeftButton" header="ARENALIVESPECTATOR_TARGETING_MACROS" category="ArenaLive [Spectator]" />
+</Bindings>

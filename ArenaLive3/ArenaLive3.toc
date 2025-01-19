@@ -1,0 +1,7 @@
+## Interface: 60000
+## Title: ArenaLive3 [Core]
+## Notes: Framework for ArenaLive.
+## Author: Vadrak
+## Version: 3.0
+
+ArenaLive.xml

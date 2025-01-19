@@ -1,0 +1,622 @@
+<!--
+    ArenaLive [Spectator] is an user interface for spectated arena 
+	wargames in World of Warcraft.
+    Copyright (C) 2015  Harald Böhm <harald@boehm.agency>
+	Further contributors: Jochen Taeschner and Romina Schmidt.
+	
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+	
+	ADDITIONAL PERMISSION UNDER GNU GPL VERSION 3 SECTION 7:
+	As a special exception, the copyright holder of this add-on gives you
+	permission to link this add-on with independent proprietary software,
+	regardless of the license terms of the independent proprietary software.
+-->
+
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+	<Frame name="ArenaLiveSpectatorNicknamePlayerButtonTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="195" y="28" />
+		</Size>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentBackground" parentKey="background">
+					<Color r="0" g="0.694" b="0.941" a="0.050"/>
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY">
+				<FontString name="$parentName" inherits="FriendsFont_Normal" justifyH="LEFT" parentKey="name">
+					<Size x="195" y="12"/>
+					<Anchors>
+						<Anchor point="LEFT" x="30" />
+					</Anchors>
+					<Color r="0.510" g="0.773" b="1" />
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<CheckButton name="$parentCheckbutton" inherits="OptionsCheckButtonTemplate" parentKey="checkButton">
+				<Anchors>
+					<Anchor point="LEFT" x="5" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						ArenaLiveSpectator.NicknameDatabase.scrollFrame.CheckButtonOnClick(self, button, down);
+					</OnClick>
+				</Scripts>
+			</CheckButton>
+		</Frames>
+	</Frame>
+	
+	<Button name="ArenaLiveSpectatorWarGamePlayerButtonTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="150" y="32" />
+		</Size>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentBackground" parentKey="background">
+					<Anchors>
+						<Anchor point="TOPLEFT" x="0" y="0"/>
+						<Anchor point="BOTTOMRIGHT" x="0" y="0"/>
+					</Anchors>
+					<Color r="0" g="0.694" b="0.941" a="0.050"/>
+				</Texture>
+			</Layer>
+			<Layer level="ARTWORK">
+				<Texture name="$parentGameIcon" file="Interface\FriendsFrame\Battlenet-WoWicon" parentKey="gameIcon">
+					<Size x="28" y="28"/>
+					<Anchors>
+						<Anchor point="TOPLEFT" x="2" y="-2"/>
+					</Anchors>
+				</Texture>
+				<FontString name="$parentName" inherits="FriendsFont_Normal" justifyH="LEFT" parentKey="name">
+					<Size x="120" y="12"/>
+					<Anchors>
+						<Anchor point="TOPLEFT" x="30" y="-4"/>
+					</Anchors>
+					<Color r="0.510" g="0.773" b="1" />
+				</FontString>
+				<FontString name="$parentInfo" inherits="FriendsFont_Small" justifyH="LEFT" parentKey="info">
+					<Size x="120" y="10"/>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parentName" relativePoint="BOTTOMLEFT" x="0" y="-2"/>
+					</Anchors>
+					<Color r="0.486" g="0.518" b="0.541" />
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>
+				self:EnableMouse(true);
+				self:RegisterForDrag("LeftButton");
+			</OnLoad>
+			<OnDragStart>
+				if ( self.battleTag ) then
+					ArenaLiveSpectatorWarGamePlayerCursorButton:SetPlayer(self.battleTag);
+				end
+			</OnDragStart>
+		</Scripts>
+	</Button>
+
+	<Button name="ArenaLiveSpectatorWarGameMenuTeamLeaderButtonTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="182" y="64"/>
+		</Size>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentButtonBackground" file="Interface\Buttons\UI-EmptySlot" parentKey="buttonbg">
+					<Size>
+						<AbsDimension x="57" y="57" />
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT">
+							<Offset>
+								<AbsDimension x="0" y="-4" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<Texture name="$parentBackground" parentKey="background">
+					<Anchors>
+						<Anchor point="TOPLEFT" x="48" y="-17"/>
+						<Anchor point="BOTTOMRIGHT" x="0" y="9"/>
+					</Anchors>
+					<Color r="1" g="0" b="0" a="0.050"/>
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY">
+				<FontString name="$parentTitle" inherits="GameFontNormal" parentKey="title">
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="10" y="0" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<Texture name="$parentIcon" parentKey="icon">
+					<Size>
+						<AbsDimension x="37" y="37" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="10" y="-17" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<FontString name="$parentName" inherits="FriendsFont_Normal" justifyH="LEFT" parentKey="name">
+					<Size x="120" y="12"/>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parentIcon" relativePoint="TOPRIGHT">
+							<Offset>
+								<AbsDimension x="5" y="-5" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Color r="0.510" g="0.773" b="1" />
+				</FontString>
+				<FontString name="$parentInfo" inherits="FriendsFont_Small" justifyH="LEFT" parentKey="info">
+					<Size x="120" y="10"/>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parentName" relativePoint="BOTTOMLEFT">
+							<Offset>
+								<AbsDimension x="0" y="-2" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Color r="0.486" g="0.518" b="0.541" />
+				</FontString>
+			</Layer>
+		</Layers>
+	</Button>
+	
+	<Button name="ArenaLiveSpectatorWarGamePlayerCursorButton" inherits="ArenaLiveSpectatorWarGamePlayerButtonTemplate" frameStrata="TOOLTIP" hidden="true" parent="UIParent" />
+	
+	<!-- Frame needs to be a button to register if someone clicks to remove the current selected player via drag an drop -->
+	<Button name="ArenaLiveSpectatorWarGameMenu" inherits="PortraitFrameTemplate" parent="UIParent" hidden="true">
+		<Size>
+			<AbsDimension x="692" y="243" />
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER">
+				<Offset>
+					<AbsDimension x="0" y="0" />
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Frames>
+			<Frame name="$parentWarGames" parentKey="warGames">
+				<Size>
+					<AbsDimension x="690" y="172" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="0" y="-70" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Frames>
+					<Frame parentKey="playerFrameInset" useParentLevel="true" inherits="InsetFrameTemplate">
+						<Size x="170" y="165"/>
+						<Anchors>
+							<Anchor point="TOPLEFT" x="5" y="0"/>
+						</Anchors>
+					</Frame>
+					<ScrollFrame name="$parentPlayerScrollFrame" inherits="HybridScrollFrameTemplate" parentKey="playerScrollFrame">
+						<Size>
+							<AbsDimension x="150" y="155" />
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="5" y="-5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Frames>
+							<Slider name="$parentScrollBar" inherits="HybridScrollBarTemplate">
+								<Anchors>
+									<Anchor point="TOPLEFT" relativePoint="TOPRIGHT" x="0" y="-12"/>
+									<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT" x="0" y="11"/>
+								</Anchors>
+							</Slider>
+						</Frames>
+					</ScrollFrame>
+					<Frame parentKey="teamInset" useParentLevel="true" inherits="InsetFrameTemplate">
+						<Size x="502" y="115"/>
+						<Anchors>
+							<Anchor point="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="-5" y="-30" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="BACKGROUND">
+								<Texture parentKey="vsText" file="Interface\AddOns\ArenaLiveSpectator3\Textures\VersusText">
+									<Size x="80" y="40"/>
+									<Anchors>
+										<Anchor point="BOTTOM">
+											<Offset>
+												<AbsDimension x="-3" y="15" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</Texture>
+							</Layer>
+						</Layers>
+						<Frames>
+							<Button name="$parentLeftLeaderButton" inherits="ArenaLiveSpectatorWarGameMenuTeamLeaderButtonTemplate" parentKey="leftLeaderButton">
+								<Anchors>
+									<Anchor point="BOTTOMLEFT">
+										<Offset>
+											<AbsDimension x="5" y="2" />
+										</Offset>
+									</Anchor>
+								</Anchors>
+							</Button>
+							<Button name="$parentRightLeaderButton" inherits="ArenaLiveSpectatorWarGameMenuTeamLeaderButtonTemplate" parentKey="rightLeaderButton">
+								<Anchors>
+									<Anchor point="BOTTOMRIGHT">
+										<Offset>
+											<AbsDimension x="-5" y="2" />
+										</Offset>
+									</Anchor>
+								</Anchors>
+							</Button>
+						</Frames>
+					</Frame>
+					<Button name="$parentStartButton" inherits="UIPanelButtonTemplate" parentKey="startButton">
+						<Anchors>
+							<Anchor point="BOTTOMRIGHT">
+								<Offset>
+									<AbsDimension x="-5" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+				</Frames>
+			</Frame>
+			<Frame name="$parentSettings" parentKey="settings">
+				<Size>
+					<AbsDimension x="680" y="315" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-7" y="-70" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="ARTWORK">
+						<FontString name="$parentOptionTitle" inherits="GameFontNormalLarge" text="ArenaLive Options:" parentKey="optionTitle">
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="10" y="-10" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString name="$parentGeneralTitle" inherits="GameFontNormal" text="General:" parentKey="generalTitle">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parentOptionTitle" relativePoint="BOTTOMLEFT">
+									<Offset>
+										<AbsDimension x="10" y="-10" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString name="$parentTargetFramesTitle" inherits="GameFontNormal" text="Target Frames:" parentKey="targetFramesTitle">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parentGeneralTitle" relativePoint="BOTTOMLEFT">
+									<Offset>
+										<AbsDimension x="0" y="-84" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString name="$parentSideFramesTitle" inherits="GameFontNormal" text="Side Frames:" parentKey="sideFramesTitel">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parentTargetFramesTitle" relativePoint="BOTTOMLEFT">
+									<Offset>
+										<AbsDimension x="0" y="-40" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString name="$parentCooldownTrackerTitle" inherits="GameFontNormal" text="Cooldown Trackers:" parentKey="cdTitle">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parentSideFramesTitle" relativePoint="BOTTOMLEFT">
+									<Offset>
+										<AbsDimension x="0" y="-40" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Frames>
+					<Frame parentKey="inset" useParentLevel="true" inherits="InsetFrameTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" />
+							<Anchor point="BOTTOMRIGHT">
+								<Offset>
+									<AbsDimension x="-2" y="23" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+				</Frames>
+			</Frame>
+			<Frame name="$parentNicknameDatabase" parentKey="nicknameDatabase">
+				<Size>
+					<AbsDimension x="680" y="444" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-7" y="-70" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="ARTWORK">
+						<FontString name="$parentTitle" inherits="GameFontNormalLarge" parentKey="title">
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="10" y="-10" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString name="$parentImportExportTitle" inherits="GameFontNormalLarge" parentKey="ieTitle">
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="10" y="-155" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Frames>
+					<Frame parentKey="inset" useParentLevel="true" inherits="InsetFrameTemplate">
+						<Size>
+							<AbsDimension x="455" y="150" />
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" />
+						</Anchors>
+					</Frame>
+					<Frame parentKey="importExportInset" useParentLevel="true" inherits="InsetFrameTemplate">
+						<Size>
+							<AbsDimension x="455" y="247" />
+						</Size>
+						<Anchors>
+							<Anchor point="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="23" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame parentKey="scrollFrameInset" useParentLevel="true" inherits="InsetFrameTemplate">
+						<Size>
+							<AbsDimension x="220" y="421" />
+						</Size>
+						<Anchors>
+							<Anchor point="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="-5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<EditBox name="$parentEditBox" inherits="ArenaLive_OptionsEditBoxTemplate" parentKey="editBox">
+						<Size>
+							<AbsDimension x="150" y="24" />
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentTitle" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="10" y="-18" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</EditBox>
+					<Button name="$parentAddNicknameButton" inherits="UIPanelButtonTemplate" text="Add" parentKey="addNicknameButton">
+						<Size>
+							<AbsDimension x="50" y="24" />
+						</Size>
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="$parentEditBox" relativePoint="RIGHT">
+								<Offset>
+									<AbsDimension x="5" y="0" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="$parentClearButton" inherits="UIPanelButtonTemplate" parentKey="clearButton">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentEditBox" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="-10" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<ScrollFrame name="$parentImportExportScrollFrame" inherits="UIPanelScrollFrameTemplate" parentKey="ieScrollFrame">
+						<Size>
+							<AbsDimension x="430" y="241"/>
+						</Size>
+						<Anchors>
+							<Anchor point="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="25" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Frames>
+							<!-- This Button is just a workaround as ScrollFrame doesn't have a OnClick script handler 
+								 and because the EditBox only has one line, if it is empty, so clickin on the center of
+								 the scroll frame wouldn't set the focus on the edit box. -->
+							<Button name="$parentClick" setAllPoints="true">
+								<Scripts>
+									<OnClick>
+										local prefix = self:GetParent():GetName();
+										local editBox = _G[prefix.."ImportExportEditBox"];
+										editBox:SetFocus();
+									</OnClick>
+								</Scripts>
+							</Button>
+						</Frames>
+						<ScrollChild name="$parentChild">
+							<EditBox name="$parentImportExportEditBox" font="ChatFontNormal" autofocus="false" multiLine="true" parentKey="editBox">
+								<Size>
+									<AbsDimension x="430" y="241"/>
+								</Size>
+								<Anchors>
+									<Anchor point="TOPLEFT" />
+								</Anchors>
+								<TextInsets left="6" right="6" top="6" bottom="6" />
+								<Scripts>
+									<OnEscapePressed>
+										self:ClearFocus();
+									</OnEscapePressed>
+								</Scripts>
+							</EditBox>
+						</ScrollChild>
+						<Scripts>
+							<OnScrollRangeChanged>
+								ScrollFrame_OnScrollRangeChanged(self, xrange, yrange);
+								local scrollBar = self.ScrollBar;
+								local _, maxValue = scrollBar:GetMinMaxValues();
+								scrollBar:SetValue(maxValue);
+							</OnScrollRangeChanged>
+						</Scripts>
+					</ScrollFrame>
+					<Button name="$parentImportButton" inherits="UIPanelButtonTemplate" parentKey="importButton">
+						<Anchors>
+							<Anchor point="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="$parentExportButton" inherits="UIPanelButtonTemplate" parentKey="exportButton">
+						<Anchors>
+							<Anchor point="TOPRIGHT" relativeTo="$parentImportExportScrollFrame" relativePoint="BOTTOMRIGHT">
+								<Offset>
+									<AbsDimension x="24" y="-1"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<ScrollFrame name="$parentScrollFrame" inherits="HybridScrollFrameTemplate" parentKey="scrollFrame">
+						<Size>
+							<AbsDimension x="195" y="412" />
+						</Size>
+						<Anchors>
+							<Anchor point="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="-29" y="-5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Frames>
+							<Slider name="$parentScrollBar" inherits="HybridScrollBarTemplate">
+								<Anchors>
+									<Anchor point="TOPLEFT" relativePoint="TOPRIGHT" x="0" y="-12"/>
+									<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT" x="0" y="11"/>
+								</Anchors>
+							</Slider>
+						</Frames>
+					</ScrollFrame>
+					<Button name="$parentNicknameDropdown" inherits="ArenaLive_OptionsDropDownTemplate" parentKey="nickNameDropdown">
+						<Anchors>
+							<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" x="-40" y="30" />
+						</Anchors>
+					</Button>
+					<Button name="$parentRemoveNicknameButton" inherits="UIPanelButtonTemplate" parentKey="removeNicknameButton">
+						<Size>
+							<AbsDimension x="24" y="24" />
+						</Size>
+						<Anchors>
+							<Anchor point="RIGHT" relativeTo="$parentNicknameDropdown" relativePoint="LEFT">
+								<Offset>
+									<AbsDimension x="15" y="2" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="$parentAddCharacterButton" inherits="UIPanelButtonTemplate" text="+" parentKey="addCharacterButton">
+						<Size>
+							<AbsDimension x="24" y="24" />
+						</Size>
+						<Anchors>
+							<Anchor point="BOTTOMRIGHT" relativeTo="$parentScrollFrame" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="0" y="10" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="$parentRemoveCharacterButton" inherits="UIPanelButtonTemplate" text="-" parentKey="removeSelectedButton">
+						<Size>
+							<AbsDimension x="24" y="24" />
+						</Size>
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="$parentAddCharacterButton" relativePoint="RIGHT">
+								<Offset>
+									<AbsDimension x="-2" y="0" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+				</Frames>
+			</Frame>
+			<Button name="$parentTab1" inherits="CharacterFrameTabButtonTemplate" id="1" parentKey="tab1">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeTo="$parent" relativePoint="BOTTOMLEFT">
+						<Offset x="19" y="-30"/>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentTab2" inherits="CharacterFrameTabButtonTemplate" id="2" parentKey="tab2">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentTab1" relativePoint="RIGHT">
+						<Offset x="-16" y="0"/>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentTab3" inherits="CharacterFrameTabButtonTemplate" id="3" parentKey="tab3">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentTab2" relativePoint="RIGHT">
+						<Offset x="-16" y="0"/>
+					</Anchor>
+				</Anchors>
+			</Button>
+		</Frames>
+	</Button>	
+	
+	<Script File="WarGameMenu.lua" />
+</Ui>

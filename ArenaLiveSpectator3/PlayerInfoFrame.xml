@@ -1,0 +1,259 @@
+<!--
+    ArenaLive [Spectator] is an user interface for spectated arena 
+	wargames in World of Warcraft.
+    Copyright (C) 2015  Harald Böhm <harald@boehm.agency>
+	Further contributors: Jochen Taeschner and Romina Schmidt.
+	
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+	
+	ADDITIONAL PERMISSION UNDER GNU GPL VERSION 3 SECTION 7:
+	As a special exception, the copyright holder of this add-on gives you
+	permission to link this add-on with independent proprietary software,
+	regardless of the license terms of the independent proprietary software.
+-->
+
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+	<Button name="ALSPEC_TalentAndGlyphButtonTemplate" virtual="true">
+		<Size x="156" y="38"/>
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture name="$parentIconTexture" parentKey="icon">
+					<Size x="32" y="32"/>
+					<Anchors>
+						<Anchor point="LEFT" x="24" y="0"/>
+					</Anchors>
+				</Texture>
+				<FontString name="$parentName" inherits="GameFontNormalSmall" justifyH="LEFT" parentKey="name">
+					<Size x="75" y="35"/>
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="$parentIconTexture" relativePoint="RIGHT" x="10" y="0"/>
+					</Anchors>
+					<Color r="1.0" g="1.0" b="1.0" a="1.0"/>
+				</FontString>
+			</Layer>
+			<Layer level="OVERLAY">
+				<Texture name="$parentBorder" atlas="Talent-Selection">
+					<Size x="156" y="38"/>
+					<Anchors>
+						<Anchor point="CENTER"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnEnter>
+				if ( self.talentID or  self.glyphID ) then
+					ArenaLiveSpectatorTooltip:SetOwner(self, "ANCHOR_TOPRIGHT");
+					if ( self.talentID ) then
+						ArenaLiveSpectatorTooltip:SetTalent(self.talentID);
+					else
+						ArenaLiveSpectatorTooltip:SetSpellByID(self.glyphID);
+					end
+				end
+			</OnEnter>
+			<OnLeave>
+				ArenaLiveSpectatorTooltip:Hide();
+			</OnLeave>
+		</Scripts>
+	</Button>
+	
+	<Frame name="ArenaLiveSpectatorPlayerInfoFrame" inherits="UIPanelDialogTemplate" enableMouse="true" movable="true" parent="ArenaLiveSpectator" hidden="true">
+		<Size x="355" y="436" />
+		<Layers>
+			<Layer level="BACKGROUND" textureSubLevel="1">
+				<Texture name="$parentInnerBackground" file="Interface\FrameGeneral\UI-Background-Rock" horizTile="true" vertTile="true" parentKey="innerBackground">
+					<Anchors>
+						<Anchor point="TOPLEFT" x="6" y="-32"/>
+						<Anchor point="BOTTOMRIGHT" x="-6" y="6"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="BACKGROUND" textureSubLevel="2">
+				<Texture name="$parentBlueBackground" file="Interface\Common\bluemenu-main">
+					<Size x="345" y="70"/>
+					<Anchors>
+						<Anchor point="TOPLEFT" x="6" y="-28" />
+					</Anchors>
+					<TexCoords left="0.00390625" right="0.82421875" top="0.18554688" bottom="0.58984375"/>
+				</Texture>
+			</Layer>
+			<Layer level="BORDER">
+				<Texture name="$parentTopTile" atlas="_Talent-Top-Tile" horizTile="true">
+					<Size y="11"/>
+					<Anchors>
+						<Anchor point="TOPLEFT"  x="7" y="-98"/>
+						<Anchor point="TOPRIGHT" x="-9" y="-98"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Anchors>
+			<Anchor point="CENTER"/>
+		</Anchors>
+		<Frames>
+			<Frame name="$parentTitleFrame" parentKey="titleFrame">
+				<Size x="165" y="100"/>
+				<Anchors>
+					<Anchor point="TOPLEFT" x="0" y="-15"/>
+				</Anchors>
+				<Layers>
+					<Layer level="ARTWORK">
+						<Texture name="$parentRing" atlas="Talent-RingWithDot" parentKey="ring">
+							<Size x="101" y="101"/>
+							<Anchors>
+								<Anchor point="TOPLEFT" x="0" y="-3"/>
+							</Anchors>
+						</Texture>
+						<FontString name="$parentPlayerName" inherits="BossEmoteNormalHuge" justifyH="BOTTOM" parentKey="playerName">
+							<Anchors>
+								<Anchor point="BOTTOMLEFT" relativeTo="$parentRing" relativePoint="RIGHT" x="-3" y="1"/>
+							</Anchors>
+							<Color r="0.984375" g="0.828125" b="0"/>
+						</FontString>
+						<FontString name="$parentSpecAndClassName" inherits="GameFontHighlightMedium" parentKey="specAndClassName">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parentPlayerName" relativePoint="BOTTOMLEFT"/>
+							</Anchors>
+							<Color r="0.48828125" g="0.50390625" b="0.515625"/>
+						</FontString>
+					</Layer>
+					<Layer level="BORDER" textureSubLevel="3">
+						<Texture name="$parentSpecIcon" parentKey="specIcon">
+							<Size x="70" y="70"/>
+							<Anchors>
+								<Anchor point="CENTER" relativeTo="$parentRing" x="-1" y="1" />
+							</Anchors>
+						</Texture>
+					</Layer>
+				</Layers>
+			</Frame>
+			<Frame name="$parentTalentFrame" parentKey="talentFrame">
+				<Size x="165" y="305" />
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentTopTile" relativePoint="BOTTOMLEFT" x="3" y="-10" />
+				</Anchors>
+				<Layers>
+					<Layer level="ARTWORK">
+						<FontString name="$parentTitle" inherits="SystemFont_Shadow_Huge1" justifyH="BOTTOM" parentKey="title">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parent" x="2" y="0"/>
+							</Anchors>
+							<Color r="0.984375" g="0.828125" b="0"/>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Frames>
+					<Frame name="$parentInset" parentKey="inset" useParentLevel="true" inherits="InsetFrameTemplate">
+						<Size x="165" y="285"/>
+						<Anchors>
+							<Anchor point="TOPLEFT" x="0" y="-21"/>
+						</Anchors>
+					</Frame>
+					<Button name="$parentTalent1" inherits="ALSPEC_TalentAndGlyphButtonTemplate" parentKey="talent1">
+						<Anchors>
+							<Anchor point="TOPLEFT" x="4" y="-25" />
+						</Anchors>
+					</Button>
+					<Button name="$parentTalent2" inherits="ALSPEC_TalentAndGlyphButtonTemplate" parentKey="talent2">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentTalent1" relativePoint="BOTTOMLEFT" y="-2" />
+						</Anchors>
+					</Button>
+					<Button name="$parentTalent3" inherits="ALSPEC_TalentAndGlyphButtonTemplate" parentKey="talent3">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentTalent2" relativePoint="BOTTOMLEFT" y="-2" />
+						</Anchors>
+					</Button>
+					<Button name="$parentTalent4" inherits="ALSPEC_TalentAndGlyphButtonTemplate" parentKey="talent4">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentTalent3" relativePoint="BOTTOMLEFT" y="-2" />
+						</Anchors>
+					</Button>
+					<Button name="$parentTalent5" inherits="ALSPEC_TalentAndGlyphButtonTemplate" parentKey="talent5">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentTalent4" relativePoint="BOTTOMLEFT" y="-2" />
+						</Anchors>
+					</Button>
+					<Button name="$parentTalent6" inherits="ALSPEC_TalentAndGlyphButtonTemplate" parentKey="talent6">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentTalent5" relativePoint="BOTTOMLEFT" y="-2" />
+						</Anchors>
+					</Button>
+					<Button name="$parentTalent7" inherits="ALSPEC_TalentAndGlyphButtonTemplate" parentKey="talent7">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentTalent6" relativePoint="BOTTOMLEFT" y="-2" />
+						</Anchors>
+					</Button>
+				</Frames>
+			</Frame>
+			<Frame name="$parentGlyphFrame" parentKey="glyphFrame">
+				<Size x="165" y="305" />
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativeTo="$parentTopTile" relativePoint="BOTTOMRIGHT" x="3" y="-10" />
+				</Anchors>
+				<Layers>
+					<Layer level="ARTWORK">
+						<FontString name="$parentTitle" inherits="SystemFont_Shadow_Huge1" justifyH="BOTTOM" parentKey="title">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parent" x="2" y="0"/>
+							</Anchors>
+							<Color r="0.984375" g="0.828125" b="0"/>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Frames>
+					<Frame name="$parentInset" parentKey="inset" useParentLevel="true" inherits="InsetFrameTemplate">
+						<Size x="165" y="245"/>
+						<Anchors>
+							<Anchor point="TOPLEFT" x="0" y="-21"/>
+						</Anchors>
+					</Frame>
+					<Button name="$parentGlyph1" inherits="ALSPEC_TalentAndGlyphButtonTemplate" parentKey="glyph1">
+						<Anchors>
+							<Anchor point="TOPLEFT" x="4" y="-25" />
+						</Anchors>
+					</Button>
+					<Button name="$parentGlyph2" inherits="ALSPEC_TalentAndGlyphButtonTemplate" parentKey="glyph2">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentGlyph1" relativePoint="BOTTOMLEFT" y="-2" />
+						</Anchors>
+					</Button>
+					<Button name="$parentGlyph3" inherits="ALSPEC_TalentAndGlyphButtonTemplate" parentKey="glyph3">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentGlyph2" relativePoint="BOTTOMLEFT" y="-2" />
+						</Anchors>
+					</Button>
+					<Button name="$parentGlyph4" inherits="ALSPEC_TalentAndGlyphButtonTemplate" parentKey="glyph4">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentGlyph3" relativePoint="BOTTOMLEFT" y="-2" />
+						</Anchors>
+					</Button>
+					<Button name="$parentGlyph5" inherits="ALSPEC_TalentAndGlyphButtonTemplate" parentKey="glyph5">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentGlyph4" relativePoint="BOTTOMLEFT" y="-2" />
+						</Anchors>
+					</Button>
+					<Button name="$parentGlyph6" inherits="ALSPEC_TalentAndGlyphButtonTemplate" parentKey="glyph6">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentGlyph5" relativePoint="BOTTOMLEFT" y="-2" />
+						</Anchors>
+					</Button>
+				</Frames>
+			</Frame>
+		</Frames>
+	</Frame>
+	
+	<Script File="PlayerInfoFrame.lua" />
+</Ui>

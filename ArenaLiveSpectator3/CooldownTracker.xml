@@ -1,0 +1,373 @@
+<!--
+    ArenaLive [Spectator] is an user interface for spectated arena 
+	wargames in World of Warcraft.
+    Copyright (C) 2015  Harald Böhm <harald@boehm.agency>
+	Further contributors: Jochen Taeschner and Romina Schmidt.
+	
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+	
+	ADDITIONAL PERMISSION UNDER GNU GPL VERSION 3 SECTION 7:
+	As a special exception, the copyright holder of this add-on gives you
+	permission to link this add-on with independent proprietary software,
+	regardless of the license terms of the independent proprietary software.
+-->
+
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">	
+	
+	<Script File="CooldownTracker.lua" />
+
+	<Font name ="ALSPEC_CDTrackerFont" font="Fonts\FRIZQT__.TTF" outline="NORMAL" justifyH="CENTER" height="14" virtual="true">
+		<FontHeight>
+			<AbsValue val="14"/>
+		</FontHeight>
+		<Shadow>
+			<Offset>
+				<AbsDimension x="1" y="-1"/>
+			</Offset>
+			<Color r="0" g="0" b="0"/>
+		</Shadow>
+		<Color r="1.0" g="1.0" b="1.0"/>
+	</Font>
+	
+	<Font name="ALSPEC_CDTrackerNameFont" font="Fonts\FRIZQT__.TTF" outline="NORMAL" justifyH="CENTER" height="10" virtual="true">
+		<FontHeight>
+			<AbsValue val="10"/>
+		</FontHeight>
+		<Shadow>
+			<Offset>
+				<AbsDimension x="1" y="-1"/>
+			</Offset>
+			<Color r="0" g="0" b="0"/>
+		</Shadow>
+		<Color r="1.0" g="1.0" b="1.0"/>
+	</Font>
+	
+	<Button name="ALSPEC_CooldownTrackerIconTemplate" hidden="true" virtual="true">
+		<Size>
+			<AbsDimension x="40" y="36" />
+		</Size>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentTexture" parentKey="texture" file="Interface\Icons\INV_Misc_QuestionMark">
+					<Size>
+						<AbsDimension x="40" y="26" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOP" />
+					</Anchors>
+					<TexCoords left="0" right="1" top="0.175" bottom="0.825"/>
+				</Texture>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parentCharges" inherits="NumberFontNormal" justifyH="RIGHT" parentKey="count">
+					<Anchors>
+						<Anchor point="BOTTOMRIGHT" relativeTo="$parentTexture">
+							<Offset>
+								<AbsDimension x="-2" y="2"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<!-- Frame nesting so the texture is above the cooldown texture -->
+			<Frame setAllPoints="true">
+				<Frames>
+					<Frame setAllPoints="true">
+						<Layers>
+							<Layer level="OVERLAY">
+								<Texture name="$parentBorder" parentKey="border" file="Interface\AddOns\ArenaLiveSpectator3\Textures\CooldownTrackerIconBorder">
+									<Size>
+										<AbsDimension x="40" y="26" />
+									</Size>
+									<Anchors>
+										<Anchor point="TOP" />
+									</Anchors>
+								</Texture>
+							</Layer>
+						</Layers>
+					</Frame>
+				</Frames>
+			</Frame>
+			<Cooldown name="$parentCooldown" parentKey="cooldown">
+				<Size>
+					<AbsDimension x="40" y="26" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOP" />
+				</Anchors>
+				<Layers>
+					<Layer level="OVERLAY">
+						<FontString name="$parentText" inherits="ALSPEC_CDTrackerFont" parentKey="text">
+							<Size>
+								<AbsDimension y="14" />
+							</Size>
+							<Anchors>
+								<Anchor point="BOTTOM">
+									<Offset>
+										<AbsDimension x="0" y="-14" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<SwipeTexture>
+					<Color r="0" g="0" b="0" a="0.8"/>
+				</SwipeTexture>
+				<EdgeTexture file="Interface\Cooldown\edge"/>
+				<!-- Cooldown bling textures don't get hidden on finish, if UIParent is not visible.
+					Therefore, comment BlingTexture here.
+				<BlingTexture file="Interface\Cooldown\star4">
+					<Color r="0.3" g="0.6" b="1" a="0.8"/>
+				</BlingTexture>-->
+			</Cooldown>
+		</Frames>
+	</Button>	
+	
+	<Button name="ALSPEC_CDTrackerTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="360" y="35" />
+		</Size>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentClassIcon">
+					<Size>
+						<AbsDimension x="26" y="26" />
+					</Size>
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY">
+				<Texture name="$parentSpecIcon">
+					<Size>
+						<AbsDimension x="14" y="14" />
+					</Size>
+					<Anchors>
+						<Anchor point="BOTTOMRIGHT" relativeTo="$parentClassIcon" />
+					</Anchors>
+				</Texture>
+				<FontString name="$parentName" inherits="ALSPEC_CDTrackerNameFont" justifyH="LEFT">
+					<Size>
+						<AbsDimension x="70" y="12" />
+					</Size>
+				</FontString>
+			</Layer>
+		</Layers>
+	</Button>
+
+	<Frame name="ALSPEC_CDTrackersLeft" parent="ArenaLiveSpectator">
+		<Size>
+			<AbsDimension x="384" y="229" />
+		</Size>
+		<Anchors>
+			<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOM">
+				<Offset>
+					<AbsDimension x="0" y="0" />
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentBackground">
+					<Color r="0" g="0" b="0" a="0.8" />
+				</Texture>
+			</Layer>
+			<Layer level="ARTWORK">
+				<Texture name="$parentGlow" file="Interface\AddOns\ArenaLiveSpectator3\Textures\CooldownTrackerSingleGlow" alphaMode="ADD">
+					<TexCoords left="0.13671875" right="0.8623046875" top="0.076171875" bottom="0.923828125"/>
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY" textureSubLevel="1">
+				<Texture name="$parentBorder" file="Interface\AddOns\ArenaLiveSpectator3\Textures\CooldownTrackerSingleBorder">
+					<Size>
+						<AbsDimension x="390" y="225" />
+					</Size>
+					<Anchors>
+						<Anchor point="BOTTOM">
+							<Offset>
+								<AbsDimension x="1.5" y="0" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0.119140625" right="0.880859375" top="0.060546875" bottom="0.939453125"/>
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY" textureSubLevel="2">
+				<Texture name="$parentHeader" file="Interface\AddOns\ArenaLiveSpectator3\Textures\CooldownTrackerHeader">
+					<Size>
+						<AbsDimension x="130" y="24" />
+					</Size>
+					<Anchors>
+						<Anchor point="CENTER" relativeTo="$parentBorder" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="-2" y="-6" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0.25" right="0.7578125" top="0.171875" bottom="0.921875"/>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="$parentTracker1" inherits="ALSPEC_CDTrackerTemplate"  id="1">
+				<Anchors> 
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="14" y="-14" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentTracker2" inherits="ALSPEC_CDTrackerTemplate"  id="2">
+				<Anchors> 
+					<Anchor point="TOPLEFT" relativeTo="$parentTracker1" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="0" y="-7" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentTracker3" inherits="ALSPEC_CDTrackerTemplate"  id="3">
+				<Anchors> 
+					<Anchor point="TOPLEFT" relativeTo="$parentTracker2" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="0" y="-7" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentTracker4" inherits="ALSPEC_CDTrackerTemplate" id="4">
+				<Anchors> 
+					<Anchor point="TOPLEFT" relativeTo="$parentTracker3" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="0" y="-7" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentTracker5" inherits="ALSPEC_CDTrackerTemplate" id="5">
+				<Anchors> 
+					<Anchor point="TOPLEFT" relativeTo="$parentTracker4" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="0" y="-7" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+		</Frames>
+	</Frame>
+	<Frame name="ALSPEC_CDTrackersRight" parent="ArenaLiveSpectator">
+		<Size>
+			<AbsDimension x="384" y="229" />
+		</Size>
+		<Anchors>
+			<Anchor point="BOTTOMLEFT" relativePoint="BOTTOM">
+				<Offset>
+					<AbsDimension x="0" y="0" />
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentBackground">
+					<Color r="0" g="0" b="0" a="0.8" />
+				</Texture>
+			</Layer>
+			<Layer level="ARTWORK">
+				<Texture name="$parentGlow" file="Interface\AddOns\ArenaLiveSpectator3\Textures\CooldownTrackerSingleGlow" alphaMode="ADD">
+					<TexCoords left="0.13671875" right="0.8623046875" top="0.076171875" bottom="0.923828125"/>
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY" textureSubLevel="1">
+				<Texture name="$parentBorder" file="Interface\AddOns\ArenaLiveSpectator3\Textures\CooldownTrackerSingleBorder">
+					<Size>
+						<AbsDimension x="390" y="225" />
+					</Size>
+					<Anchors>
+						<Anchor point="BOTTOM">
+							<Offset>
+								<AbsDimension x="1.5" y="0" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0.119140625" right="0.880859375" top="0.060546875" bottom="0.939453125"/>
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY" textureSubLevel="2">
+				<Texture name="$parentHeader" file="Interface\AddOns\ArenaLiveSpectator3\Textures\CooldownTrackerHeader">
+					<Size>
+						<AbsDimension x="130" y="24" />
+					</Size>
+					<Anchors>
+						<Anchor point="CENTER" relativeTo="$parentBorder" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="-2" y="-6" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0.25" right="0.7578125" top="0.171875" bottom="0.921875"/>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="$parentTracker1" inherits="ALSPEC_CDTrackerTemplate" id="1">
+				<Anchors> 
+					<Anchor point="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-14" y="-14" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentTracker2" inherits="ALSPEC_CDTrackerTemplate" id="2">
+				<Anchors> 
+					<Anchor point="TOPRIGHT" relativeTo="$parentTracker1" relativePoint="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="0" y="-7" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentTracker3" inherits="ALSPEC_CDTrackerTemplate" id="3">
+				<Anchors> 
+					<Anchor point="TOPRIGHT" relativeTo="$parentTracker2" relativePoint="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="0" y="-7" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentTracker4" inherits="ALSPEC_CDTrackerTemplate" id="4">
+				<Anchors> 
+					<Anchor point="TOPRIGHT" relativeTo="$parentTracker3" relativePoint="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="0" y="-7" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentTracker5" inherits="ALSPEC_CDTrackerTemplate" id="5">
+				<Anchors> 
+					<Anchor point="TOPRIGHT" relativeTo="$parentTracker4" relativePoint="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="0" y="-7" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+		</Frames>
+	</Frame>
+</Ui>
