@@ -24,7 +24,9 @@
 ]]
 
 -- Addon Name and localisation table:
-local FORCED_ALPHA = true 
+local FORCED_ALPHA = true
+local NAMEPLATE_SIZE = 0.9
+local NAMEPLATE_TARGET_SIZE = 1.0
 
 local addonName, L = ...;
 
@@ -551,6 +553,12 @@ function NamePlateClass:UpdateAppearance()
 	if ( isInPvP and isPlayer ) then
 
 		self:SetSize(188, 52);
+		if (self.unit and self.unit == "target") then
+			self:SetScale(NAMEPLATE_TARGET_SIZE);
+		else
+			self:SetScale(NAMEPLATE_SIZE);
+		end		
+		
 		
 		self.classIcon:Show();
 		
@@ -680,6 +688,7 @@ function NamePlateClass:UpdateHealthBar()
 	local red, green, blue = blizzPlate.healthBar:GetStatusBarColor();
 	if ( self.unit ) then
 		HealthBar:Update(self);
+		return
 	
 	-- overwrite statusbar functionality (which automatically sets class color) with our own, if no unit is available outside PvP
 	elseif (isPlayer) then
@@ -688,7 +697,19 @@ function NamePlateClass:UpdateHealthBar()
 			self.HealthBar:SetStatusBarColor(RAID_CLASS_COLORS[class].r, RAID_CLASS_COLORS[class].g, RAID_CLASS_COLORS[class].b);
 		else
 			self.HealthBar:SetStatusBarColor(red, green, blue);	
-		end	
+		end
+
+		local minValue, maxValue = blizzPlate.healthBar:GetMinMaxValues();
+		local value = blizzPlate.healthBar:GetValue();
+		
+		-- Prevent Division by zero:
+		if ( maxValue == 0 ) then
+			maxValue = 1;
+		end
+
+		-- no reset of statusbar color
+		self.HealthBar:SetMinMaxValues(minValue, maxValue);
+		self.HealthBar:SetValue(value);
 	else
 		local minValue, maxValue = blizzPlate.healthBar:GetMinMaxValues();
 		local value = blizzPlate.healthBar:GetValue();
@@ -703,7 +724,6 @@ function NamePlateClass:UpdateHealthBar()
 		self.HealthBar:SetMinMaxValues(minValue, maxValue);
 		self.HealthBar:SetValue(value);
 	end
-	
 end
 
 function NamePlateClass:UpdateNameText()

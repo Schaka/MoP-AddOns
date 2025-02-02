@@ -47,11 +47,12 @@ ArenaLive.spellDB = {
 			
 			["CCIndicator"] = { -- This table is used to track those spells, that are shown in the cc indcator.
 				-- The order is [spellID] = Priority-Type.
-				-- TODO: match to https://github.com/ManneN1/BigDebuffs-MoP/blob/main/BigDebuffs.lua
 
 				-- Death Knight
 				[48707] = "defCD",			-- Anti-Magic Shell
 				[48792] = "defCD",			-- Icebound Fortitude
+				[115018] = "usefulBuffs", 	-- Desecrated Ground
+				[77606] = "offCD", 			-- Darm Sim
 				[49039] = "defCD",			-- Lichborne
 				[51271] = "offCD", 			-- Pillar of Frost
 				[49016] = "offCD",			-- Unholy Frenzy
@@ -63,6 +64,8 @@ ArenaLive.spellDB = {
 				[96294] = "root",			-- Chains of Ice (root)
 				[91807] = "root", 			-- Pet Leap Root
 				[115001] = "stun",			-- Remorseless
+				[73975] = "usefulBuffs",	-- Necrotic Wound
+				[49028] = "usefulBuffs",	-- Dancing Rune Weapon
 				
 				-- Druid
 				[33786] = "defCD",			-- Cyclone (Made that one a def CD, because the enemy is immune to everything during cyclone)
@@ -93,9 +96,14 @@ ArenaLive.spellDB = {
 				[132158] = "offCD", 		-- Nature's Swiftness
 
 				-- Hunter
+				[136] = "usefulBuffs",		-- Mend Pet
 				[5384] = "defCD",			-- Feign Death
 				[19263] = "defCD",			-- Deterrence
 				[117526] = "stun",			-- Binding Shot
+				[131894] = "usefulBuffs",	-- Murder of Crows
+				[128405] = "root",			-- Narrow Escape
+				[19574] = "usefulBuffs",	-- Beastial Wrath
+				[53480] = "defCD",			-- Roar of Sacrifice
 				[19577] = "stun",			-- Intimidation (stun)			
 				[90337] = "stun",			-- Bad Manner (Monkey Pet)
 				[126246] = "stun",			-- Lullaby (Crane Pet)
@@ -118,14 +126,18 @@ ArenaLive.spellDB = {
 				[90327] = "root",			-- Lock Jaw (Dog Pet)
 				[4167] = "root",			-- Web (Spider Pet)
 				[54706] = "root",			-- Venom Web Spray (Silithid Pet)
-				[90361] = "usefulBuffs"	,	-- Spirit Mend (Spirit Pet)
+				[90361] = "usefulBuffs",	-- Spirit Mend (Spirit Pet)
 				[53271] = "defCD",			-- Master's Call
+				[62305] = "defCD",			-- Master's Call
 				
 				-- Mage
 				[45438] = "defCD",			-- Ice Block
+				[115760] = "defCD",			-- Glyph of Ice Block
+				[115610] = "defCD",			-- Temporal Shield
 				[12472] = "offCD",			-- Icy Veins
 				[44461] = "usefulDebuffs", 	-- Living Bomb
 				[102051] = "stun",			-- Frost Jaw
+				[118271] = "stun",			-- Combustion stun
 				[44572] = "stun",			-- Deep Freeze
 				[118271] = "stun";			-- Combustion Impact
 				[55021] = "silence",		-- Counterspell silence
@@ -157,8 +169,16 @@ ArenaLive.spellDB = {
 				[116706] = "root",			-- Disable (root)
 				[123393] = "root",			-- Spinning Fire Blossom
 				[116841] = "usefulBuffs",	-- Tiger's Lust
+				[131523] = "usefulBuffs",	-- Zen Medidation
+				[122278] = "defCD", 		-- Dampen Harm
+				[122470] = "defCD",			-- Touch of Karma
+				[122783] = "defCD",			-- Diffuse Magic
+				[115295] = "defCD",			-- Guard
+				[115308] = "defCD",			-- Elusive Brew
+				[137562] = "defCD",			-- Nimble Brew
 
 				-- Paladin
+				[498] = "defCD",			-- Divine Protection
 				[642] = "defCD",			-- Divine Shield
 				[31884] = "offCD",			-- Avenging Wrath
 				[105593] = "stun",			-- Fist of Justice
@@ -166,8 +186,24 @@ ArenaLive.spellDB = {
 				[119072] = "stun",			-- Holy Wrath
 				[31935] = "silence",		-- Avenger's Shield
 				[145067] = "crowdControl",	-- Turn Evil
+				[115750] = "crowdControl",	-- Blinding Light
 				[105421] = "crowdControl",	-- Blinding Light
+				[115752] = "crowdControl",	-- Blinding Light
 				[20066] = "crowdControl",	-- Repentance
+				[1022] = "defCD", -- Hand of Protection
+				[1044] = "usefulBuffs", -- Hand of Freedom
+				[6940] = "defCD", -- Hand of Sacrifice
+				[20066] = "crowdControl", -- Repentance
+				[31821] = "usefulBuffs", -- Devotion Aura
+				[31850] = "defCD", -- Ardent Defender
+				[31884] = "offCD", -- Avenging Wrath
+				[31842] = "usefulBuffs", -- Divine Favor
+				[31935] = "crowdControl", -- Avenger's Shield
+				[10326] = "crowdControl", -- Turn Evil
+				[145067]= "crowdControl", -- Turn Evil (Evil is a Point of View)
+				[86659] = "usefulBuffs", -- Guardian of Ancient Kings
+				[105809] = "offCD", -- Holy Avenger
+				[119072] = "crowdControl",	-- Holy Wrath
 				
 				-- Priest
 				[113506] = "defCD", 		-- Cyclone (Symbiosis) (Made that one a def CD, because the enemy is immune to everything during cyclone)
@@ -192,9 +228,14 @@ ArenaLive.spellDB = {
 				[5277] = "defCD",			-- Evasion
 				[31224] = "defCD",			-- Cloak of Shadows
 				[121471] = "offCD",			-- Shadow Blades
+				[13750] = "offCD",			-- Adrenaline Rush
+				[51690] = "offCD",			-- Killing Spree
 				[51713] = "offCD",			-- Shadow Dance
 				[408] = "stun", 			-- Kidney Shot
 				[1833] = "stun",			-- Cheap Shot
+				[1966] = "usefulBuffs",		-- Feint
+				[74001] = "defCD",			-- Combat Readiness
+				[57933] = "usefulBuffs",	-- Tricks
 				-- [76577] = 90,			-- Smokebomb
 				[113953] = "stun",			-- Paralysis (Paralitic Poison Stun)
 				[1330] = "silence",			-- Garrote - Silence
@@ -203,12 +244,24 @@ ArenaLive.spellDB = {
 				[6770] = "crowdControl", 	-- Sap
 				[51722] = "disarm", 		-- Dismantle
 				[115197] = "root", 			-- Partial Paralysis (Paralitic Poison Shiv)
+				[84747] = "usefulBuffs",	-- Deep Insight (30% damage)
 				
 				-- Shaman
-				[113288] = "silence", 		-- Solar Beam (Symbiosis)
+				[113288] = "silence", 		-- Solar Beam (Symbiosis
+				[79206] = "usefulBuffs",	-- Spiritwalker's Grace
+				[30823] = "defCD",			-- Shamanistic Rage
+				[108281] = "defCD",			-- Ancestral Guidance
+				[108271] = "defCD",			-- Astral Shift
+				[114050] = "defCD",			-- Ascenance
+				[114051] = "defCD",			-- Ascenance
+				[114052] = "defCD",			-- Ascenance
+				[114893] = "defCD",			-- Ancestral Swiftness
 				[16166] = "offCD",			-- Elemental Mastery
+				[120676] = "offCD",			-- Stormlash Totem Effect
 				[118905] = "stun",			-- Static Charge
 				[118345] = "stun",			-- Pulverize (Primal Earth Elemental)
+				[8178] = "usefulBuffs",		-- Grounding
+				[114896] = "usefulBuffs",	-- Windwalk
 				[77505] = "stun",			-- Earthquake Stun
 				[51514] = "crowdControl",	-- Hex
 				[76780] = "crowdControl",	-- Bind Elemental
@@ -226,6 +279,8 @@ ArenaLive.spellDB = {
 				[22703] = "stun",			-- Infernal Awakening
 				[24259] = "silence",		-- Spell lock (Pet-silence)
 				[115782] = "silence",		-- Optical Blast (Pet-silence)
+				[31117] = "silence",		-- Unstable Affliction (silence)
+				[111397] = "defCD", 		-- Blood Horror (buff)
 				[137143] = "crowdControl",	-- Blood Horror
 				[5484] = "crowdControl",	-- Howl of Terror
 				[118699] = "crowdControl",	-- Fear
@@ -234,22 +289,39 @@ ArenaLive.spellDB = {
 				[30108] = "usefulDebuffs",	-- Unstable Affliction		
 				
 				-- Warrior
-				[871] = "defCD",			-- Shield Wall
-				[1719] = "offCD",			-- Recklessness
-				[50622] = "offCD", 			-- Bladestorm
-				[7922] = "stun",			-- Charge Stun
-				[132168] = "stun",			-- Shockwave
-				[118000] = "stun",			-- Dragon Roar
-				[132169] = "stun",			-- Storm Bolt
-				[58357] = "silence",		-- Heroic Throw silence ?
-				[5246] = "crowdControl",	-- Intimidating Shout
-				[20511] = "crowdControl", 	-- Intimidating Shout
-				[95199] = "crowdControl",	-- Intimidating Shout
-				[676] = "disarm",			-- Disarm
-				[107566] = "root",			-- Staggering Shout
-				[105771] = "root",			-- Warbringer
-				[23920] = "usefulBuffs",	-- Spell Reflection
-				[114028] = "usefulBuffs",	-- Mass Spell Reflection
+				[871] = "defCD", -- Shield Wall
+				[1719] = "offCD", -- Recklessness
+				[12292] = "usefulBuffs", -- Bloodbath
+				[114206] = "usefulBuffs", -- Skull Banner
+				[118895] = "crowdControl", -- Dragon Roar
+				[5246] = "crowdControl", -- Intimidating Shout
+				[20511] = "crowdControl", -- Intimidating Shout (targeted)
+				[7922] = "crowdControl", -- Charge Stun
+				[12975] = "defCD", -- Last Stand
+				[18499] = "usefulBuffs", -- Berserker Rage
+				[23920] = "usefulBuffs", -- Spell Reflection
+				[114028] = "usefulBuffs", -- Mass Spell Reflection
+				[46968] = "crowdControl", -- Shockwave
+				[132168] = "crowdControl",	-- Shockwave
+				[97462] = "defCD", -- Rallying Cry
+				[97463] = "defCD", -- Rallying Cry
+				[105771] = "root", -- Charge (Warrior)
+				[107566] = "root", -- Staggering Shout
+				[107574] = "offCD", -- Avatar
+				[118038] = "defCD", -- Die by the Sword
+				[107570] = "stun", -- Storm Bolt
+				[132169] = "stun", -- Storm Bolt
+				[55694]	= "defCD", -- Enraged Regeneration
+				[114029] = "defCD", -- Safeguard
+				[114030] = "defCD", -- Vigilance
+				[34784] = "defCD", -- Intervene
+				[147833] = "defCD", -- Intervene
+				[46924] = "offCD", -- Bladestorm
+				[676] = "disarm", -- Disarm
+				[18498] = "silence", -- Silenced - Gag Order (PvE only)
+				[2457] = "usefulBuffs", -- Battle Stance
+				[2458] = "usefulBuffs", -- Berserker Stance
+				[71] = "usefulBuffs", -- Defensive Stance
 			},
 			
 			["FilteredSpells"] = { --[[This list blocks spells that cause bugs in the casthistory.]]--
