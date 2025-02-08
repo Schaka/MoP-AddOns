@@ -1,0 +1,7 @@
+## Interface: 50400
+## Title: DampenNumbers
+## Notes: Puts a number on your Dampening debuff frame
+## Author: Schaka
+
+
+DampenNumbers.lua
